@@ -1,0 +1,62 @@
+from tkinter import *
+from tkinter import messagebox
+
+users = {
+    "muqeeth": {"pin": "1234"},
+    "mirza": {"pin": "5678"}
+}
+
+
+def authentication():
+    user_id = unentry.get()
+    pin = pinentry.get()
+
+    if user_id in users and users[user_id]["pin"] == pin:
+        options()
+    else:
+        messagebox.showerror("Error", "Invalid User ID or PIN")
+
+
+def options():
+    f22 = Frame(ui, borderwidth=2, bg="lightblue")
+    f22.propagate(False)
+    f22.configure(width=1100, height=400, bg="lightblue")
+    f22.place(x=50, y=75)
+    Button(f22, text="Transaction history", font="arial 25 ", bg="white", fg="green").place(x=60, y=10)
+    Button(f22, text="Withdraw amount", font="arial 25 ", bg="white", fg="green").place(x=740, y=10)
+    Button(f22, text="Deposit", font="arial 25 ", bg="white", fg="green").place(x=300, y=150)
+    Button(f22, text="Transfer", font="arial 25 ", bg="white", fg="green").place(x=650, y=150)
+    Button(f22, text="Quit", font="arial 25 ", bg="white", fg="red", command=quit).place(x=500, y=300)
+
+
+def p_quit():
+    exit()
+
+
+ui = Tk()
+ui.title("OCTANET INTERNSHIP")
+ui.geometry("1200x500")
+ui.minsize(1200, 500)
+ui.maxsize(1200, 500)
+ui.config(bg="lightblue")
+f1 = Frame(ui, borderwidth=2)
+f1.pack(side=TOP, pady=5)
+atm = Label(f1, text="A T M", font="aerial 25 bold", bg="white", fg="blue", padx=570, pady=5)
+atm.pack()
+f2 = Frame(ui, borderwidth=10, bg="lightblue")
+f2.pack(side=TOP, pady=50)
+username = Label(f2, text="Enter Username", fg="black", bg="lightblue", font="arial 12 ")
+username.pack()
+username_value = StringVar()
+pin_value = StringVar()
+bval = IntVar()
+unentry = Entry(f2, textvariable=username_value, width=25)
+unentry.pack(pady=10)
+pinL = Label(f2, text="Enter Pin", fg="black", bg="lightblue", font="arial 12 ")
+pinL.pack()
+pinentry = Entry(f2, textvariable=pin_value, width=15)
+pinentry.pack(pady=10)
+bt = Button(f2, text="submit", font="timesnewroman 12 bold", bd=5, padx=20, command=authentication)
+bt.pack(side=BOTTOM, pady=20)
+Label(text="*****please cover the keypad while entering details*****",bg="lightblue", font="FrenchScriptMT 10").pack()
+ui.mainloop()
